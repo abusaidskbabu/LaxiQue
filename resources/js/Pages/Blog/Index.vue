@@ -1,5 +1,5 @@
 <template>
-<layout  :categories="cat">
+<layout  :categories="cat" :categorys2="categorys2">
 <div class="mt-5">
             <!-- BLOG SECTION START -->
             <div class="blog-section mb-50 plr-185">
@@ -60,7 +60,7 @@ border-radius: 0;
 <script>
     import Layout from '@/Shared/Layout'
     export default {
-        props: ['errors', 'successMessage', 'errorMessage', 'cat','blogs', 'category_name'],
+        props: ['errors', 'successMessage', 'errorMessage', 'cat','blogs', 'category_name','categorys2'],
         components:{
             Layout,
         },

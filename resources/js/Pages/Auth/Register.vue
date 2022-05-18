@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
 <div>
 <!-- BREADCRUMBS SETCTION START -->
 <div class="breadcrumbs-section plr-200 mb-80 section">
@@ -45,11 +45,17 @@
                         <form @submit.prevent="submit">
                             <div class="login-account p-30 box-shadow">
                                 <p>If you dont have an account with us, Please Create an Account.</p>
+                                <div class="input-group mb-4">
+                                    <input v-model="form.phone_number" class="form-control" type="text" placeholder="Mobile Number" aria-label="Mobile Number" aria-describedby="basic-addon2" required="">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary h-100" @click.prevent="generate_otp" type="button">Generate OTP</button>
+                                    </div>
+                                </div>
+                                <input v-model="form.otp" type="text" placeholder="OTP" required="">
                                 <input v-model="form.name" type="text" placeholder="Full Name">
-                                <input v-model="form.phone_number" type="text" placeholder="Mobile Number">
                                 <input v-model="form.email" type="text" placeholder="Email">
-                                <input v-model="form.password" type="text" placeholder="Password">
-                                <input v-model="form.password_confirmation" type="text" placeholder="Confirm Password">
+                                <!-- <input v-model="form.password" type="text" placeholder="Password"> -->
+                                <!-- <input v-model="form.password_confirmation" type="text" placeholder="Confirm Password"> -->
                                 <p>Already have an account? <inertia-link :href="route('login')"> Click</inertia-link> here to &nbsp;<inertia-link :href="route('login')">login</inertia-link> </p>
                                 <button class="submit-btn-1 btn-hover-1" type="submit">Create Account</button>
                             </div>
@@ -96,7 +102,7 @@ border-radius: 0;
     import Layout from '@/Shared/Layout'
 
     export default {
-        props: ['errors', 'successMessage', 'errorMessage'],
+        props: ['errors', 'successMessage', 'errorMessage','categorys2'],
         components: {
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
@@ -114,6 +120,7 @@ border-radius: 0;
                     name: '',
                     email: '',
                     phone_number: '',
+                    otp: '',
                     password: '',
                     password_confirmation: '',
                     terms: false,
@@ -126,7 +133,15 @@ border-radius: 0;
                 this.form.post(this.route('register_web'), {
                     onFinish: () => this.form.reset('password', 'password_confirmation'),
                 })
-            }
+            },
+
+            generate_otp() {
+                this.form.post(this.route('generate_otp'), {
+                    // onFinish: () => this.form.reset('password', 'password_confirmation'),
+
+                })
+            },
+
         }
     }
 </script>

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
+// use App\Models\Category;
 use Inertia\Inertia;
+use App\Category;
 use DB;
 use Auth;
 use Session;
@@ -57,14 +58,29 @@ class ProductController extends Controller
         foreach($featuedProducts as $product){
             $product->image = explode(',',$product->image);
         }
-        $categories= DB::table('categories')->where('is_active', 1)->orderby('name', 'ASC')->get();
+
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+
         return Inertia::render('Product/ProductList', [
             'products'          => $products,
             'brands'            => $brands,
-            'categories'            => $categories,
+            'categories'            => $categorys2,
             'newproducts'       => $newproducts,
             'featuedProducts'   => $featuedProducts,
-            'search_query'      => $query
+            'search_query'      => $query,
+            'categorys2' => $categorys2
         ]);
 
     }
@@ -272,6 +288,20 @@ class ProductController extends Controller
 			
 			$metakeyWord = explode(' ',$products->name);
 			$metakeyWord = implode(',',$metakeyWord);
+
+            $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+            foreach($categorys2 as $item){
+                $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+                foreach($item->sub_category as $item1){
+                    
+                    $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                    foreach($item1->child_sub_category as $item2){
+                        $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                    }
+                }
+            }
 			
 			$metadata = [
 				'meta_title' => 'LuxiQue - '.$products->name,
@@ -287,6 +317,7 @@ class ProductController extends Controller
                 'brands' => $brands,
                 'product_img_array' => $product_img_array,
                 'related_product' => $related_product,
+                'categorys2' => $categorys2,
                 'brand'   => $brand??null,
                 'category'=> $category??null,
                 'size'    => $size??null,
@@ -395,9 +426,22 @@ class ProductController extends Controller
     
     public function category_page(Request $request){
         $categories = DB::table('categories')->where('is_active', 1)->get();
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
         return Inertia::render('Product/Category', [
-            'categories'          => $categories
+            'categories'          => $categories,
+            'categorys2' => $categorys2,
         ]);
     }
 
@@ -434,12 +478,26 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
         return Inertia::render('Product/ProductList', [
             'products'      => $products,
             'brands'        => $brands,
             'newproducts'   => $newproducts,
             'featuedProducts'   => $featuedProducts,
-            'category_name'     =>  $category_name
+            'category_name'     =>  $category_name,
+            'categorys2'    =>$categorys2,
         ]);
         
     }
@@ -477,11 +535,26 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+
         return Inertia::render('Product/ProductList', [
             'products'      => $products,
             'brands'        => $brands,
             'newproducts'   => $newproducts,
             'featuedProducts'   => $featuedProducts,
+            'categorys2' => $categorys2,
         ]);
         
     }
@@ -556,8 +629,23 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+
         return Inertia::render('Product/Deal', [
             'products'      => $products,
+            'categorys2' => $categorys2
         ]);
     }
 

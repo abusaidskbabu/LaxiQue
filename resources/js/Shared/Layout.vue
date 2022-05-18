@@ -95,24 +95,41 @@
                             <li class="mega-parent"><a href="#">Category</a>
                                 <div class="mega-menu-area clearfix">
                                     <div class="mega-menu-link f-left">
-                                        <ul v-for="(category, index) in categories" :key="index" class="single-mega-item mb-4">
+                                       
+                                        <ul v-for="(category, index) in categorys2" :key="index" class="single-mega-item mb-4">
                                             <li class="menu-title">
                                                 <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
                                                     {{category.name}}
                                                 </inertia-link>
                                             </li>
-                                            <li>
-                                                <a href="#">All Mobile Phones</a>
-                                            </li>
+                                            <span v-if="category.sub_category">
+                                                <ul v-for="(sub_category, index1) in category.sub_category" :key="index1">
+                                                    <li>
+                                                        <inertia-link :href="`/category/`+sub_category.slug" > 
+                                                            {{sub_category.name}}
+                                                        </inertia-link>
+                                                    </li>
+                                                    <span v-if="sub_category.child_sub_category">
+                                                        <li v-for="(child_sub_category, index1) in sub_category.child_sub_category" :key="index1" style="margin-left:20px;">
+                                                            <inertia-link :href="`/category/`+child_sub_category.slug" > 
+                                                                {{child_sub_category.name}}
+                                                            </inertia-link>
+                                                        </li>
+                                                    </span>
+
+                                                </ul>
+                                                
+                                            </span>
+
                                         </ul>
                                     </div>
                                 </div>
                             </li>
                             <li> <inertia-link :href="route('shop.page')">Products</inertia-link></li>
-                            <li> <inertia-link :href="route('blog.page')">News feed</inertia-link></li>
+                            <!-- <li> <inertia-link :href="route('blog.page')">News feed</inertia-link></li> -->
                             <li> <inertia-link :href="route('about.page')">About Us</inertia-link> </li>
                             <li><inertia-link :href="route('contact.page')">Contact Us</inertia-link> </li>
-                            <li><inertia-link href="/deals" class="deals" >Special Deals</inertia-link> </li>
+                            <li><inertia-link href="/deals" class="deals" >Flash Sale</inertia-link> </li>
                         </ul>
                     </nav>
                 </div>
@@ -252,7 +269,7 @@
                         <li><inertia-link href="/">Home </inertia-link></li>
                         <li><a href="#">Category</a>
                             <ul style="display: none;">
-                                <li v-for="(category, index) in categories" :key="index" >
+                                <li v-for="(category, index) in categorys2" :key="index" >
                                     <inertia-link :href="`/category/`+category.slug" > 
                                         {{category.name}}
                                     </inertia-link>
@@ -364,19 +381,19 @@
                                     </div>
                                      <ul class="footer-social pb-2">
                                             <li>
-                                                <a target="_blank" class="facebook" href="https://www.facebook.com/techhut.com.bd/" title="Facebook"><i class="zmdi zmdi-facebook"></i></a>
+                                                <a target="_blank" class="facebook" href="https://www.facebook.com/LuxiqueBd/" title="Facebook"><i class="zmdi zmdi-facebook"></i></a>
                                             </li>
                                             <li>
                                                 <a target="_blank" class="twitter" href="" title="Twitter"><i class="zmdi zmdi-twitter"></i></a>
                                             </li>
                                             <li>
-                                                <a target="_blank" class="youtube" href="https://www.youtube.com/channel/UCZvFCTcVBPDRNbx_P5RtEcQ" title="Youtube"><i class="zmdi zmdi-youtube"></i></a>
+                                                <a target="_blank" class="youtube" href="https://www.youtube.com/channel/UCDPEWLY5Z42cQUB-EUE9lCw" title="Youtube"><i class="zmdi zmdi-youtube"></i></a>
                                             </li>
 											<li>
-                                                <a target="_blank" class="facebook" href="https://www.linkedin.com/company/techhut-com-bd/" ><i class="zmdi zmdi-linkedin"></i></a>
+                                                <a target="_blank" class="facebook" href="#" ><i class="zmdi zmdi-linkedin"></i></a>
                                             </li>
 											<li>
-                                                <a target="_blank" class="youtube" href="https://www.instagram.com/techhut.com.bd/" title="RSS"><i class="zmdi zmdi-instagram"></i></a>
+                                                <a target="_blank" class="youtube" href="#" title="RSS"><i class="zmdi zmdi-instagram"></i></a>
                                             </li>
                                         </ul>
 
@@ -385,10 +402,10 @@
                                                 <a class="ecab pr-3" href="http://e-cab.net/" title="ecab" target="_blank"> <img :src="base_url()+`frontend/images/ecab.png`" alt=""> </a>
                                             </li>
                                             <li>
-                                                <a class="android pr-3" href="https://play.google.com/store/apps/details?id=com.vmsl.techhut" title="android"  target="_blank"> <img :src="base_url()+`frontend/images/android.png`" alt="" > </a>
+                                                <a class="android pr-3" href="https://play.google.com" title="android"  target="_blank"> <img :src="base_url()+`frontend/images/android.png`" alt="" > </a>
                                             </li>
                                             <li>
-                                                <a class="apple" href="https://apps.apple.com/us/app/techhut/id1592282019" title="apple" target="_blank" ><img :src="base_url()+`frontend/images/apple.png`" alt="" ></a>
+                                                <a class="apple" href="https://apps.apple.com" title="apple" target="_blank" ><img :src="base_url()+`frontend/images/apple.png`" alt="" ></a>
                                             </li>
                                         </ul>
                                 </div>
@@ -483,7 +500,7 @@
             Button,
         },
 
-        props:['errors', 'successMessage', 'errorMessage', 'categories','flush','cart','wishlist', 'compare', 'deals','product'],
+        props:['errors', 'successMessage', 'errorMessage', 'categorys2','flush','cart','wishlist', 'compare', 'deals','product'],
 
         data() {
             return {

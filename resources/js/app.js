@@ -17,12 +17,12 @@ createApp({
 	{ methods: {
         route,
         parent_url(){
-            // return "http://127.0.0.1:7000/";
-            return "http://pos.luxique.com.bd/";
+            return "http://127.0.0.1:7000/";
+            // return "http://pos.luxique.com.bd/";
         },
         base_url(){
-        //    return "http://127.0.0.1:7001/";
-           return "https://luxique.com.bd/";
+           return "http://127.0.0.1:7001/";
+        //    return "https://luxique.com.bd/";
         }
     }
 	})

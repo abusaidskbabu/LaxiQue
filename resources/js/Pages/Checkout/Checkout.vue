@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
         <!-- BREADCRUMBS SETCTION START -->
         <div class="breadcrumbs-section plr-200 mb-80 section">
             <div class="breadcrumbs overlay-bg" :style="'background: url('+base_url()+`frontend/img/breadcrumb/1.png` + ')no-repeat;background-position: center;background-size: cover;' ">
@@ -191,7 +191,7 @@
 <script>
     import Layout from '@/Shared/Layout';
     export default {
-        props: ['errors','total_items','user_data','free_shipping','couponCart'],
+        props: ['errors','total_items','user_data','free_shipping','couponCart','categorys2'],
         components:{
             Layout
         },

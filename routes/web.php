@@ -85,7 +85,10 @@ Route::get('login/{provider}', [ConcaveController::class, 'redirectToProvider'])
 Route::get('login/{provider}/callback', [ConcaveController::class, 'handleProviderCallback']);
 
 //Custom Registration and Login
+Route::post('/generate_otp', [ConcaveController::class, 'generate_otp'])->name('generate_otp');
+
 Route::post('/register_web', [ConcaveController::class, 'register_web'])->name('register_web');
+
 Route::post('/web_login', [ConcaveController::class, 'web_login'])->name('web_login');
 
 //Review

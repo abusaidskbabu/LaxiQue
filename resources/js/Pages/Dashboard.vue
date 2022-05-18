@@ -1,6 +1,6 @@
 
 <template>
-<layout>
+<layout :categorys2="categorys2">
 <div>
 <!-- breadcrumb start -->
 <div class="breadcrumb-main ">
@@ -96,7 +96,7 @@ button{
 
 
     export default {
-        props: ['pageSlug','user','orders','pageTitle','singleOrder','myCoupon','myRef'],
+        props: ['pageSlug','user','orders','pageTitle','singleOrder','myCoupon','myRef','categorys2'],
         components: {Layout,Home,MyOrders,OrderDetails,TrackOrder,MyWishlist,MyCoupon,ChangePassword,EditInfo},
         methods: {
             logout() {

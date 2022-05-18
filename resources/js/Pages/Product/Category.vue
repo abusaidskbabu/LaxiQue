@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
     <div>
         <!--  Featured category start -->
             <div class="product-tab-section mb-50">
@@ -37,7 +37,7 @@
     import ProductModal from "@/Pages/Product/ProductModal";
     
     export default {
-        props: ['categories'],
+        props: ['categories','categorys2'],
         components:{
             Layout,Paginator,FilterBar,ProductModal
         },

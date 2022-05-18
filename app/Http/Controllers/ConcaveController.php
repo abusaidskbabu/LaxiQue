@@ -13,9 +13,13 @@ use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Product;
 use App\Coupon;
+use App\Category;
+use App\Customer;
 use App\Models\Blog;
+use App\Models\OtpSms;
 use Validator;
 use Hash;
+use Helper;
 
 class ConcaveController extends Controller{
 
@@ -186,7 +190,21 @@ class ConcaveController extends Controller{
         $new_arrival = Product::where('is_active', 1)->where('hide_on_website', 0)->orderBy('id', 'DESC')->with('deal')->limit(15)->get() ?? null;
         $featuredCatIds =  Product::where('featured', 1)->where('hide_on_website', 0)->where('is_active', 1)->with('deal')->pluck('category_id');
         $featuredCategories = DB::table('categories')->whereIn('id', $featuredCatIds)->where('is_active', 1)->limit(16)->get();
-        $categorys= DB::table('categories')->where('is_active', 1)->orderby('name', 'ASC')->get();
+
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+
         $featured_product =  Product::where('featured', 1)->where('hide_on_website', 0)->where('is_active', 1)->with('deal')->get();
 
         $blogs = DB::table('blogs')->where('is_active', 1)->orderBy('id', 'DESC')->get() ?? null;
@@ -232,6 +250,24 @@ class ConcaveController extends Controller{
         }else{
             $user = null;
         }
+
+        $deals = DB::table('deals')->whereDate('expire', '>', Carbon::now())->get();
+        $dealProductIds = [];
+
+        if($deals){
+            foreach($deals as $deal){
+                $dealProductIds[] = $deal->product_id;
+            }
+        }
+
+       
+        
+        $products = Product::where('is_active',1)->where('hide_on_website', 0)->with('deal')->whereIn('id',$dealProductIds)->limit(20)->get();
+        
+
+        foreach($products as $product){
+            $product->image = explode(',',$product->image);
+        }
 		
 		$metadata = [
 			'meta_title' => 'LuxiQue - Home',
@@ -244,8 +280,9 @@ class ConcaveController extends Controller{
             'user'      => $user,
             'slider' => $sliders,
             'brands' => $brands,
-            'categorys' => $categorys,
+            'categorys2' => $categorys2,
             'new_arrival_product'   => $new_arrival,
+            'flash_sale'            => $products,
             'featuredCategories'    => $featuredCategories,
             'featured_product'      => $featured_product,
             'deal_percentage_data'  => $deal_percentage_data ?? null,
@@ -256,9 +293,6 @@ class ConcaveController extends Controller{
             'blogs'                 => $blogs ?? null,
         ])->withViewData($metadata);
     }
-
-
-
 
 
 
@@ -285,26 +319,89 @@ class ConcaveController extends Controller{
 		
 		$about = \DB::table('pages')->first();
 
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+
         return Inertia::render('About', [
             'user'      => $user,
+            'categorys2'      => $categorys2,
             'cat' => $categories,
             'about' => $about->about_us,
         ]);
     }  
     public function contact(){
-        return Inertia::render('Contact');
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+        return Inertia::render('Contact',[
+            'categorys2' => $categorys2,
+        ]);
     }  
 
     public function register(){
-        return Inertia::render('Myaccount');
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+        return Inertia::render('Myaccount',[
+            'categorys2' => $categorys2,
+        ]);
+        
     }
 
     
 
     
     public function signup(){
-        return Inertia::render('Signup');
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+        return Inertia::render('Signup',[
+            'categorys2' => $categorys2,
+        ]);
     }
+
+    
 
     public function contact_submit(Request $request){
         $request->validate([
@@ -362,89 +459,144 @@ class ConcaveController extends Controller{
         return back();
     } 
 
+    public function generate_otp(Request $request){
+        $request->validate([
+            'phone_number' => 'required|min:11|max:11',
+        ]);
+
+        $previous_otp = OtpSms::where('phone_number', $request->get('phone_number'))->orderBy('id', 'DESC')->FIRST();
+
+        $current_time = Carbon::now();
+
+        $current_timestamp = Carbon::now()->toDateTimeString();
+        $difference = $previous_otp->created_at->diffInMinutes($current_timestamp);
+        
+        if (count(OtpSms::where('phone_number', $request->get('phone_number'))->whereDay('created_at', $current_time)->get()) >= 5) {
+            session()->flash('success', 'Sorry! You cannot generate OTP more than 5 times in a day!');
+            return back();
+        }elseif($difference < 5){
+            session()->flash('success', 'Sorry! Try after 5 minutes!');
+            return back();
+        }else{
+            $otp = random_int(100000, 999999);
+
+            $message = 'LuxiQue: আপনার OTP কোড:';
+            $message .= ' '.$otp.'. দয়া করে কারো সাথে আপনার OTP কোড শেয়ার করবেন না।';
+
+            Helper::sendSms($request->get('phone_number'), $message);
+
+            $otp_sms = new OtpSms();
+            $otp_sms->phone_number = $request->get('phone_number');
+            $otp_sms->otp = $otp;
+            $otp_sms->save();
+
+            session()->flash('success', 'OTP has been send successfully!');
+            return back();
+        }
+    }
 
     public function register_web(Request $request){
+
         $request->validate([
             'name' => 'required',
+            'otp' => 'required',
             'email' => 'nullable|email|unique:customers',
             'phone_number' => 'required|min:11|max:11|unique:customers',
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'required | min:6'
+            // 'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            // 'password_confirmation' => 'required | min:6'
         ]);
+
+        $previous_otp = OtpSms::where('phone_number', $request->get('phone_number'))->where('otp', $request->get('otp'))->orderBy('id', 'DESC')->FIRST();
+        if($previous_otp){
 		
-		if($user_id = session()->get('account_registration_referral_id')){
-			
-			$has_coupon = DB::table('coupons')->where('customer_id',$user_id)->where('code','WELCOME50')->first();
-			
-			if(!$has_coupon){
-				$coupon_data['code'] = 'WELCOME50';
-				$coupon_data['type'] = 'fixed';
-				$coupon_data['amount'] = 50;
-				$coupon_data['minimum_amount'] = 500;
-				$coupon_data['quantity'] = 0;
-				$coupon_data['used'] = 0;
-				$coupon_data['expired_date'] =  date('Y-m-d H:i:s',strtotime('+5 years',strtotime('01/01/2021'))) . PHP_EOL;;
-				$coupon_data['user_id'] = 1;
-				$coupon_data['customer_id'] = $user_id;
-				$coupon_data['coupon_type'] = 'individual';
-				$coupon_data['is_active'] = 1;
-				$coupon_data['created_at'] = date('Y-m-d H:i:s');
-				$coupon_data['updated_at'] = date('Y-m-d H:i:s');
-				DB::table('coupons')->insert($coupon_data);
-			}
-			$data['referrer_id'] = $user_id;
-		}
+            if($user_id = session()->get('account_registration_referral_id')){
+                
+                $has_coupon = DB::table('coupons')->where('customer_id',$user_id)->where('code','WELCOME50')->first();
+                
+                if(!$has_coupon){
+                    $coupon_data['code'] = 'WELCOME50';
+                    $coupon_data['type'] = 'fixed';
+                    $coupon_data['amount'] = 50;
+                    $coupon_data['minimum_amount'] = 500;
+                    $coupon_data['quantity'] = 0;
+                    $coupon_data['used'] = 0;
+                    $coupon_data['expired_date'] =  date('Y-m-d H:i:s',strtotime('+5 years',strtotime('01/01/2021'))) . PHP_EOL;;
+                    $coupon_data['user_id'] = 1;
+                    $coupon_data['customer_id'] = $user_id;
+                    $coupon_data['coupon_type'] = 'individual';
+                    $coupon_data['is_active'] = 1;
+                    $coupon_data['created_at'] = date('Y-m-d H:i:s');
+                    $coupon_data['updated_at'] = date('Y-m-d H:i:s');
+                    DB::table('coupons')->insert($coupon_data);
+                }
+                $data['referrer_id'] = $user_id;
+            }
 
-        $data['name']        = $request->name;
-        $data['email']       = $request->email;
-        $data['phone_number']   = $request->phone_number;
-        $data['customer_group_id']   = 3;
-        $data['password']    = Hash::make($request->password);
+            $data['name']        = $request->name;
+            $data['email']       = $request->email;
+            $data['phone_number']   = $request->phone_number;
+            $data['customer_group_id']   = 3;
+            // $data['password']    = Hash::make($request->password);
 
-        $created_user_id = DB::table('customers')->insertGetId($data);
-		
-		if($user_id = session()->get('account_registration_referral_id')){
-			
-			$coupon_data['customer_id'] = $created_user_id;
-			$coupon_data['code'] = 'WELCOME50';
-			$coupon_data['type'] = 'fixed';
-			$coupon_data['amount'] = 50;
-			$coupon_data['minimum_amount'] = 500;
-			$coupon_data['quantity'] = 1;
-			$coupon_data['used'] = 0;
-			$coupon_data['expired_date'] =  date('Y-m-d H:i:s',strtotime('+5 years',strtotime('01/01/2021'))) . PHP_EOL;;
-			$coupon_data['user_id'] = 1;
-			$coupon_data['coupon_type'] = 'individual';
-			$coupon_data['is_active'] = 1;
-			$coupon_data['created_at'] = date('Y-m-d H:i:s');
-			$coupon_data['updated_at'] = date('Y-m-d H:i:s');;
+            $created_user_id = DB::table('customers')->insertGetId($data);
+            
+            if($user_id = session()->get('account_registration_referral_id')){
+                
+                $coupon_data['customer_id'] = $created_user_id;
+                $coupon_data['code'] = 'WELCOME50';
+                $coupon_data['type'] = 'fixed';
+                $coupon_data['amount'] = 50;
+                $coupon_data['minimum_amount'] = 500;
+                $coupon_data['quantity'] = 1;
+                $coupon_data['used'] = 0;
+                $coupon_data['expired_date'] =  date('Y-m-d H:i:s',strtotime('+5 years',strtotime('01/01/2021'))) . PHP_EOL;;
+                $coupon_data['user_id'] = 1;
+                $coupon_data['coupon_type'] = 'individual';
+                $coupon_data['is_active'] = 1;
+                $coupon_data['created_at'] = date('Y-m-d H:i:s');
+                $coupon_data['updated_at'] = date('Y-m-d H:i:s');;
 
-			DB::table('coupons')->insert($coupon_data);
-		}
-		session()->forget('account_registration_referral_id');
-        session()->flash('success', 'You account has been successfully created!');
-        return redirect('/login');
+                DB::table('coupons')->insert($coupon_data);
+            }
+            session()->forget('account_registration_referral_id');
+            session()->flash('success', 'You account has been successfully created!');
+            return redirect('/login');
+        }else{
+            session()->flash('success', 'OTP not match!');
+            return back();
+        }
     }
 
 
     public function web_login(Request $request){
         $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'phone_number' => 'required',
+            'otp' => 'required',
         ]);
 
-        if(is_numeric($request->get('email'))){
-            $credentials = ['phone_number'=>$request->get('email'),'password'=>$request->get('password')];
-        }elseif(filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
-            $credentials = ['email' => $request->get('email'), 'password'=>$request->get('password')];
-        }
+        
 
-        if (Auth::attempt($credentials)) {
-            return redirect('/dashboard');
-        }else{
-            session()->flash('error', 'Opps! You have entered invalid credentials');
-            return back();
+        if(is_numeric($request->get('phone_number'))){
+            $previous_otp = OtpSms::where('phone_number', $request->get('phone_number'))->where('otp', $request->get('otp'))->orderBy('id', 'DESC')->FIRST();
+            if($previous_otp){
+                $credentials = ['phone_number'=>$request->get('phone_number')];
+                $customer = Customer::where('phone_number', $request->get('phone_number'))->where('is_active',1)->first();
+                if (Auth::loginUsingId($customer->id)) {
+                    return redirect('/dashboard');
+                }else{
+                    session()->flash('error', 'Opps! You have entered invalid credentials');
+                    return back();
+                }
+            }else{
+                session()->flash('success', 'OTP not match!');
+                return back();
+            }
         }
+        // elseif(filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
+        //     $credentials = ['email' => $request->get('email'), 'password'=>$request->get('password')];
+        // }
+
+        
     }
 
  
@@ -471,12 +623,26 @@ class ConcaveController extends Controller{
 
     
     public function compare(){
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+       
         $compare = session()->get('compare');
         $compare_count = count($compare['products']);
  
         return Inertia::render('Product/Compare', [
             'compare_count'      => $compare_count,
+            'categorys2' => $categorys2,
         ]);
     }
 
@@ -503,8 +669,23 @@ public function blog_page(){
     $blogs = DB::table('blogs')->where('is_active', 1)->orderBy('id', 'DESC')->limit(12)->get() ?? null;
     $user = Auth::user();
 
+    $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
+       
     return Inertia::render('Blog/Index', [
         'user'      => $user,
+        'categorys2' =>$categorys2,
         'blogs'            => $blogs ?? null,
     ]); 
 }

@@ -1,5 +1,5 @@
 <template>
-<layout  :categories="cat">
+<layout  :categories="cat" :categorys2="categorys2">
     <div>
         <!-- BREADCRUMBS SETCTION START -->
         <div class="breadcrumbs-section plr-200 mb-80 section">
@@ -31,20 +31,20 @@
                         <div class="col-md-4">
                             <div class="contact-address box-shadow">
                                 <i class="zmdi zmdi-pin"></i>
-                                <h6>House- 54/A (2nd Floor), Road-132, Gulshan Circle-1,Dhaka -1212, Bangladesh</h6>
+                                <h6>House - 21/1, Urdho road, Chand mansion, Jumrat Tower, Lalbagh, Dhaka 1211, Bangladesh</h6>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="contact-address box-shadow">
                                 <i class="zmdi zmdi-phone"></i>
-                                <h6><a href="tel:0123456789">LP: +880 22222 88836</a></h6>
-                                <h6><a href="tel:+8801894922006">HL: +880 18949 22006</a></h6>
+                                <h6><a href="tel:01949-168823">LP: +880 1949-168823</a></h6>
+                                <h6><a href="tel:+8801871774466">HL: +880 1871-774466</a></h6>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="contact-address box-shadow">
                                 <i class="zmdi zmdi-email"></i>
-                                <h6>info@techhut.com.bd</h6>
+                                <h6>luxiquebd@gmail.com</h6>
                             </div>
                         </div>
                     </div>
@@ -57,8 +57,7 @@
                 <div class="container-fluid">
                     <div class="google-map">
                         <div id="googleMap">
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.058766311897!2d90.4146119153631!3d23.780921593525687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70a4905a4b5%3A0xdded3506a5707b91!2sTech%20Hut!5e0!3m2!1sen!2sbd!4v1629706394580!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.058766311897!2d90.4146119153631!3d23.780921593525687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70a4905a4b5%3A0xdded3506a5707b91!2sTech%20Hut!5e0!3m2!1sen!2sbd!4v1629706394580!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
@@ -142,7 +141,7 @@ border-radius: 0;
 <script>
     import Layout from '@/Shared/Layout'
     export default {
-        props: ['errors', 'successMessage', 'errorMessage', 'cat'],
+        props: ['errors', 'successMessage', 'errorMessage', 'cat', 'categorys2'],
         components:{
             Layout,
         },

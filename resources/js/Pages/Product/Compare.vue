@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
 <div>
         <!-- BREADCRUMBS SETCTION START -->
         <div class="breadcrumbs-section plr-200 mb-80 section">
@@ -147,7 +147,7 @@
 <script>
     import Layout from '@/Shared/Layout';
     export default {
-        props: ['compare_count'],
+        props: ['compare_count','categorys2'],
         components:{
             Layout
         },

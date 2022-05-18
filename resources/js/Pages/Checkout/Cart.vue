@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
 <div>
 
     <!-- BREADCRUMBS SETCTION START -->
@@ -168,7 +168,7 @@
     import Layout from '@/Shared/Layout';
     export default {
 
-        props: ['cat'],
+        props: ['cat','categorys2'],
         components:{
             Layout
         },

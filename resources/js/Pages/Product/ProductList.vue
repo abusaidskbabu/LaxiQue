@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
     <div>
         <!-- BREADCRUMBS SETCTION START -->
         <div v-if="category_name" class="breadcrumbs-section plr-200 mb-80 section">
@@ -149,7 +149,7 @@
     import ProductModal from "@/Pages/Product/ProductModal";
     
     export default {
-        props: ['products','brands','newproducts', 'featuedProducts','categories','search_query'],
+        props: ['products','brands','newproducts', 'featuedProducts','categories','search_query','categorys2'],
         components:{
             Layout,Paginator,FilterBar,ProductModal
         },

@@ -13,9 +13,23 @@ class BlogController extends Controller{
     public function index(){
         $blogs = Blog::latest()->where('is_active', 1)->get();
 
+        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        foreach($categorys2 as $item){
+            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+
+            foreach($item->sub_category as $item1){
+                
+                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+
+                foreach($item1->child_sub_category as $item2){
+                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
+                }
+            }
+        }
         return Inertia::render('Blog/Index', [
             'user'      => $user,
             'cat' => $categories,
+            'categorys2' => $categorys2,
         ]);  
        // return view('frontend.blog.index', compact('blogs'));
     }

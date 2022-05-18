@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
         <!-- BREADCRUMBS SETCTION START -->
         <div class="breadcrumbs-section plr-200 mb-80 section">
             <div class="breadcrumbs overlay-bg" :style="'background: url('+base_url()+`frontend/img/breadcrumb/1.png` + ')no-repeat;background-position: center;background-size: cover;' ">
@@ -433,7 +433,7 @@ display: inline-block;
 <script>
     import Layout from '@/Shared/Layout';
     export default {
-        props: ['product', 'size', 'color', 'weight', 'product_img_array', 'related_product','is_reviewable','reviews','brand','category','brands','newproducts', 'featuedProducts','restock'],
+        props: ['product', 'size', 'color', 'weight', 'product_img_array', 'related_product','is_reviewable','reviews','brand','category','brands','newproducts', 'featuedProducts','restock','categorys2'],
         components:{
             Layout
         },

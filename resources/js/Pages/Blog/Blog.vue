@@ -1,5 +1,5 @@
 <template>
-    <layout>
+    <layout :categorys2="categorys2">
         <div class="blog-section mb-50 pb-60 plr-185 mt-5">
                 <div class="container-fluid">
                     <div class="row">
@@ -153,7 +153,7 @@
 <script>
     import Layout from '@/Shared/Layout'
     export default {
-        props: ['blog', 'date', 'month', 'comments', 'categories'],
+        props: ['blog', 'date', 'month', 'comments', 'categories', 'categorys2'],
         components:{
             Layout,
         },

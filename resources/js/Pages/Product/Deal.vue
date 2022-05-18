@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
     <div>
  
         <!-- Start page content -->
@@ -124,7 +124,7 @@
     import FilterBar from "@/Pages/Product/FilterBar";
     
     export default {
-        props: ['products','brands','newproducts', 'featuedProducts','category_name','search_query'],
+        props: ['products','brands','newproducts', 'featuedProducts','category_name','search_query','categorys2'],
         components:{
             Layout,Paginator,FilterBar
         },

@@ -1,5 +1,5 @@
 <template>
-<layout>
+<layout :categorys2="categorys2">
 <div>
 
 
@@ -52,8 +52,15 @@
                                 <form @submit.prevent="submit">
                                     <div class="login-account p-30 box-shadow">
                                         <p>If you have an account with us, Please log in.</p>
-                                        <input type="text"  v-model="form.email" placeholder="Email / Phone">
-                                        <input type="password" v-model="form.password" placeholder="Password">
+                                        <div class="input-group mb-4">
+                                            <input v-model="form.phone_number" class="form-control" type="text" placeholder="Mobile Number" aria-label="Mobile Number" aria-describedby="basic-addon2" required="">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary h-100" @click.prevent="generate_otp" type="button">Generate OTP</button>
+                                            </div>
+                                        </div>
+                                        <input v-model="form.otp" type="text" placeholder="OTP" required="">
+                                        <!-- <input type="text"  v-model="form.email" placeholder="Email / Phone"> -->
+                                        <!-- <input type="password" v-model="form.password" placeholder="Password"> -->
                                         <p style="width: 300px;margin: 0;float: left;"><inertia-link :href="route('password.request')" id="fgpwd">Forgot password?</inertia-link></p>
                                         <p><inertia-link :href="route('register')" class="float-right">Create an Account</inertia-link></p>
                                         <br>
@@ -118,14 +125,14 @@ border-radius: 0;
             canResetPassword: Boolean,
             status: String
         },
-        props: ['errors', 'successMessage', 'errorMessage'],  
+        props: ['errors', 'successMessage', 'errorMessage', 'categorys2'],  
         
         
         data() {
             return {
                 form: this.$inertia.form({
-                    email: '',
-                    password: '',
+                    phone_number: '',
+                    otp: '',
                     remember: false
                 })
             }
@@ -141,6 +148,12 @@ border-radius: 0;
                     .post(this.route('web_login'), {
                         onFinish: () => this.form.reset('password'),
                     })
+            },
+            generate_otp() {
+                this.form.post(this.route('generate_otp'), {
+                    // onFinish: () => this.form.reset('password', 'password_confirmation'),
+
+                })
             }
         }
     }

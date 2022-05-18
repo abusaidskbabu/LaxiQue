@@ -121,7 +121,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 }
 .single-mega-item li {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 .single-mega-item li:last-child {
   margin-bottom: 0;
@@ -129,7 +129,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 .single-mega-item .menu-title {
   color: #444;
   font-size: 14px;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
   text-transform: capitalize;
 }
 .single-mega-item li:last-child{
