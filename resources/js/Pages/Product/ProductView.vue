@@ -93,12 +93,12 @@
                                             </div>
                                             <div class="row product-accordion">
                                                 <div class="col-sm-12">
-                                                <div v-if="product.qty > 0">
+                                                <div v-if="product.qty > 0 || product.allow_backorder == 1" >
                                                     <div v-if="size.length > 0" class="size_section">
                                                         <h5 class="product-title">Select Size </h5>
                                                         <ul> 
                                                             <li v-for="size in size" :key="size"> 
-                                                                <input :data-qty-available="size.qty" v-model="variant_id" type="radio" name="size" :value="size.variant_id" :data-add-price="size.additional_price" class="size"> <div class="varient_text">{{ size.variant_name }}</div>
+                                                                <input :data-qty-available="size.qty" :data-backorder-available="product.allow_backorder" v-model="variant_id" type="radio" name="size" :value="size.variant_id" :data-add-price="size.additional_price" class="size"> <div class="varient_text">{{ size.variant_name }}</div>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -107,7 +107,7 @@
                                                         <h5 class="product-title">Select Color</h5>
                                                         <ul> 
                                                             <li  v-for="color in color" :key="color">
-                                                                <input :data-qty-available="color.qty" v-model="variant_id" type="radio" name="color" :value="color.variant_id" :data-add-price="color.additional_price" class="size"> <div class="varient_text">{{ color.variant_name }}</div>
+                                                                <input :data-qty-available="color.qty" :data-backorder-available="product.allow_backorder" v-model="variant_id" type="radio" name="color" :value="color.variant_id" :data-add-price="color.additional_price" class="size"> <div class="varient_text">{{ color.variant_name }}</div>
                                                             </li> 
                                                         </ul>
                                                     </div>
@@ -115,7 +115,7 @@
                                                         <h5 class="product-title">Select weight</h5>
                                                         <ul> 
                                                             <li  v-for="weight in weight" :key="weight">
-                                                                <input :data-qty-available="weight.qty" v-model="variant_id" type="radio" name="weight" :value="weight.variant_id" :data-add-price="weight.additional_price" class="size"> <div class="varient_text">{{ weight.variant_name }}</div>
+                                                                <input :data-qty-available="weight.qty" :data-backorder-available="product.allow_backorder" v-model="variant_id" type="radio" name="weight" :value="weight.variant_id" :data-add-price="weight.additional_price" class="size"> <div class="varient_text">{{ weight.variant_name }}</div>
                                                             </li> 
                                                         </ul>
                                                     </div>

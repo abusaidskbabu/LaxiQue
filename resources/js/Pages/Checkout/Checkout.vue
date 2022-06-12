@@ -109,8 +109,8 @@
 																	
 																	<div v-else class="shipping">
                                                                         <div class="shopping-option">
-                                                                            <input type="radio" name="shipping_charge" :data-price="$page.props.cart.sub_total" class="shipping_charge trigger_gd1" data-charge="60" v-model="checkoutForm.shipping_charge"  value="insidedhaka" required>
-                                                                            <label for="free-shipping">Inside Dhaka BDT 60 </label>
+                                                                            <input type="radio" name="shipping_charge" :data-price="$page.props.cart.sub_total" class="shipping_charge trigger_gd1" data-charge="50" v-model="checkoutForm.shipping_charge"  value="insidedhaka" required>
+                                                                            <label for="free-shipping">Inside Dhaka BDT 50 </label>
                                                                         </div>
                                                                         <div class="shopping-option">
                                                                             <input type="radio" name="shipping_charge" :data-price="$page.props.cart.sub_total" class="shipping_charge trigger_gd" data-charge="100" v-model="checkoutForm.shipping_charge" value="outsidedhaka" required>
@@ -152,7 +152,7 @@
 													
 													<div class="payment-method ml-3 mt-5">
                                                         <h6 class="widget-title border-left mb-20">Coupon Code</h6>
-														<input style="width:50%;" type="text" name="coupon" id="coupon_code" v-model="checkoutForm.coupon" placeholder="Enter coupon code.." >
+														<input style="width:70%;" type="text" name="coupon" id="coupon_code" v-model="checkoutForm.coupon" placeholder="Enter coupon code.." >
 														<a id="coupon_code_btn" @click="couponCheck()" style="height: 41px;padding: 5px 14px;margin-left: -4px;border-radius: 0 8px 8px 0;" href="javascript:void(0)" class="btn btn-dark">Update</a>
 													</div>
 													

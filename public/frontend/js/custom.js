@@ -97,7 +97,7 @@ $(document).on('click','.single-footer-c',function(){
 });
 
 jQuery(document).on('click','.product-accordion ul li input',function(){
-    if(jQuery(this).attr('data-qty-available') < 1 ){
+    if(jQuery(this).attr('data-backorder-available') < 1 ){
         jQuery('.to-cart').hide();
         jQuery('.in_stock').hide();
         jQuery('.out_of_stock').show();
@@ -141,7 +141,7 @@ jQuery(document).on('click','.feedback_submit',function(){
 });
 
 jQuery(document).on('click','.trigger_gd',function(){
-	jQuery('.payment-2').hide();
+	jQuery('.payment-2').show();
 });
 
 jQuery(document).on('click','.trigger_gd1',function(){

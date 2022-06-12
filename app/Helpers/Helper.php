@@ -62,7 +62,7 @@ class Helper{
         $data =[
         "username"=>"luxique",
         "password"=>"luxique@140",
-        "sender"=>"8809612442357",
+        "sender"=>"LaxiQue",
         "message"=> $messageBody,
         "to"=>$to
         ];
@@ -82,6 +82,7 @@ class Helper{
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
+        
     } 
 	
 	

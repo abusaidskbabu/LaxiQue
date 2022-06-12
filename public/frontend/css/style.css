@@ -1854,7 +1854,7 @@ table {width: 100%}
 
 .success,.error {
     background: #000000b8;
-    padding: 10px 30px;
+    padding: 30px 30px;
     color: #fff;
     font-size: 14px;
     position: fixed;

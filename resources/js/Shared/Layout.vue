@@ -96,38 +96,26 @@
                                 <div class="mega-menu-area clearfix">
                                     <div class="mega-menu-link f-left">
                                        
-                                        <ul v-for="(category, index) in categorys2" :key="index" class="single-mega-item mb-4">
-                                            <li class="menu-title">
+                                        <ul  class="single-mega-item mb-4">
+                                            <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
                                                 <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
                                                     {{category.name}}
                                                 </inertia-link>
                                             </li>
-                                            <span v-if="category.sub_category">
-                                                <ul v-for="(sub_category, index1) in category.sub_category" :key="index1">
-                                                    <li>
-                                                        <inertia-link :href="`/category/`+sub_category.slug" > 
-                                                            {{sub_category.name}}
-                                                        </inertia-link>
-                                                    </li>
-                                                    <span v-if="sub_category.child_sub_category">
-                                                        <li v-for="(child_sub_category, index1) in sub_category.child_sub_category" :key="index1" style="margin-left:20px;">
-                                                            <inertia-link :href="`/category/`+child_sub_category.slug" > 
-                                                                {{child_sub_category.name}}
-                                                            </inertia-link>
-                                                        </li>
-                                                    </span>
-
-                                                </ul>
-                                                
-                                            </span>
-
                                         </ul>
                                     </div>
                                 </div>
                             </li>
+
+                            <t v-for="(category, index) in categorys2" :key="index" >
+                                <li v-if="category.is_feture == 1"> 
+                                    <inertia-link class="text-uppercase" :href="`/category/`+category.slug">{{category.name}}</inertia-link>
+                                </li>
+                            </t>
+
                             <li> <inertia-link :href="route('shop.page')">Products</inertia-link></li>
                             <!-- <li> <inertia-link :href="route('blog.page')">News feed</inertia-link></li> -->
-                            <li> <inertia-link :href="route('about.page')">About Us</inertia-link> </li>
+                            <!-- <li> <inertia-link :href="route('about.page')">About Us</inertia-link> </li> -->
                             <li><inertia-link :href="route('contact.page')">Contact Us</inertia-link> </li>
                             <li><inertia-link href="/deals" class="deals" >Flash Sale</inertia-link> </li>
                         </ul>

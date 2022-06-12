@@ -3,7 +3,7 @@
 <div>
         <!-- START SLIDER AREA -->
         <div class="slider-area plr-185 mb-80 section">
-            <div class="container">
+            <div class="container-fluid p-0">
                 <div class="slider-content">
                     <div class="active-slider-1 slick-arrow-1 slick-dots-1">
                         <!-- layer-1 Start -->
@@ -11,17 +11,15 @@
                             <div class="col-lg-12">
                                 <div class="layer-1">
                                     <div class="slider-img">
-                                        <img :src="parent_url()+`images/slider/${data.image}`" alt="">
-                                    </div>
-                                    <div class="slider-info gray-bg">
-                                        <div class="slider-info-inner">
-                                            <h1 class="slider-title-1 text-uppercase text-black-1"> {{ data.title }} </h1>
-                                            <div class="slider-brief text-black-2">
-                                                <p>{{ data.exert }}</p>
+                                        <img :src="parent_url()+`images/slider/${data.image}`" alt="" >
+                                        <div class="slider-info ">
+                                            <div class="slider-info-inner text-center">
+                                                <div v-for="(category, index) in categorys2" :key="index">
+                                                    <inertia-link v-if="category.is_feture == 1" :href="`/category/`+category.slug" class="button button-black " style="width:300px;">
+                                                        <span class="text-uppercase ">{{ category.name }}</span>
+                                                    </inertia-link><br>
+                                                </div>
                                             </div>
-                                            <inertia-link :href="data.btn_link" class="button extra-small button-black">
-                                                <span class="text-uppercase">{{ data.btn_text }}</span>
-                                            </inertia-link>
                                         </div>
                                     </div>
                                 </div>

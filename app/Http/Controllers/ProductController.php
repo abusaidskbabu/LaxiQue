@@ -449,7 +449,7 @@ class ProductController extends Controller
     public function category(Request $request){
         
         $category_slug = $request->categoryslug;
-        $category = DB::table('categories')->where('slug',$category_slug)->first();
+        $category = DB::table('categories')->where('slug',$category_slug)->where('is_active',1)->first();
         $category_name = null;
     
         if($request->brands || $request->price ){

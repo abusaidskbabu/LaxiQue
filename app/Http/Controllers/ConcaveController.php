@@ -469,14 +469,24 @@ class ConcaveController extends Controller{
         $current_time = Carbon::now();
 
         $current_timestamp = Carbon::now()->toDateTimeString();
-        $difference = $previous_otp->created_at->diffInMinutes($current_timestamp);
+
+        // var_dump($previous_otp);
+        // exit();
+
+        if($previous_otp != NULL){
+            $difference = $previous_otp->created_at->diffInMinutes($current_timestamp);
+        }else{
+            $difference = 5;
+        }
+        
         
         if (count(OtpSms::where('phone_number', $request->get('phone_number'))->whereDay('created_at', $current_time)->get()) >= 5) {
             session()->flash('success', 'Sorry! You cannot generate OTP more than 5 times in a day!');
             return back();
-        }elseif($difference < 5){
-            session()->flash('success', 'Sorry! Try after 5 minutes!');
-            return back();
+        // }elseif($difference > 5){
+            
+        //     session()->flash('success', 'Sorry! Try after 5 minutes!');
+        //     return back();
         }else{
             $otp = random_int(100000, 999999);
 
@@ -574,23 +584,26 @@ class ConcaveController extends Controller{
             'otp' => 'required',
         ]);
 
-        
-
-        if(is_numeric($request->get('phone_number'))){
-            $previous_otp = OtpSms::where('phone_number', $request->get('phone_number'))->where('otp', $request->get('otp'))->orderBy('id', 'DESC')->FIRST();
-            if($previous_otp){
-                $credentials = ['phone_number'=>$request->get('phone_number')];
-                $customer = Customer::where('phone_number', $request->get('phone_number'))->where('is_active',1)->first();
-                if (Auth::loginUsingId($customer->id)) {
-                    return redirect('/dashboard');
+        if(Customer::where('phone_number', $request->get('phone_number'))->where('is_active',1)->exists()){
+            if(is_numeric($request->get('phone_number'))){
+                $previous_otp = OtpSms::where('phone_number', $request->get('phone_number'))->where('otp', $request->get('otp'))->orderBy('id', 'DESC')->FIRST();
+                if($previous_otp){
+                    $credentials = ['phone_number'=>$request->get('phone_number')];
+                    $customer = Customer::where('phone_number', $request->get('phone_number'))->where('is_active',1)->first();
+                    if (Auth::loginUsingId($customer->id)) {
+                        return redirect('/dashboard');
+                    }else{
+                        session()->flash('error', 'Opps! You have entered invalid credentials');
+                        return back();
+                    }
                 }else{
-                    session()->flash('error', 'Opps! You have entered invalid credentials');
+                    session()->flash('success', 'OTP not match!');
                     return back();
                 }
-            }else{
-                session()->flash('success', 'OTP not match!');
-                return back();
             }
+        }else{
+            session()->flash('error', 'Opps! Please registration first.');
+            return back();
         }
         // elseif(filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
         //     $credentials = ['email' => $request->get('email'), 'password'=>$request->get('password')];

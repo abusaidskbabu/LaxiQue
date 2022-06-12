@@ -465,6 +465,19 @@ a.button.button-black span {
   color: #fff;
   font-weight: normal;
 }
+@media only screen and (max-width: 768px){
+  a.button.button-black span{
+    display: block;
+    float: left;
+    position: relative;
+    z-index: 2;
+    padding: 3px 4px;
+    font-size: 11px;
+    color: #fff;
+    font-weight: normal;
+  }
+}
+
 a.button-border span {
   border: 0 none;
   border-radius: 3px;
@@ -734,7 +747,7 @@ textarea:focus {
   color: #ccc;
   outline: none;
   font-size: 40px;
-  left: -60px;
+  left: 32px;
   line-height: 20px;
   margin-top: -10px;
   position: absolute;
@@ -744,7 +757,7 @@ textarea:focus {
 }
 .slick-arrow-1 .arrow-next.slick-arrow {
   left: auto;
-  right: -60px;
+  right: 32px;
 }
 .slick-arrow-1 .slick-arrow:hover {
   color: #000;

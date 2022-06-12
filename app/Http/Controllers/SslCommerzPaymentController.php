@@ -571,7 +571,7 @@ class SslCommerzPaymentController extends Controller
             	
 				if($request->phone_number){
 					$mobileNumber = $request->phone_number;
-					$message = 'Thanks for your order. Order ID: TH'.date('ymd',strtotime($order->created_at)).$order_info->id.', Transaction ID #'.$post_data['tran_id'].' Visit techhut.com.bd/login to track your order.';
+					$message = 'আপনার অর্ডারের জন্য ধন্যবাদ। আপনার Order ID: TH'.date('ymd',strtotime($order->created_at)).$order_info->id.', Transaction ID #'.$post_data['tran_id'].' .';
 					Helper::sendSms($mobileNumber,$message);
 				}
 

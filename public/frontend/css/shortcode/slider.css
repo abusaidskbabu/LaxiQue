@@ -14,7 +14,7 @@
   position: relative;
 }
 .slider-img {
-  width: 53%;
+  width: 100%;
 }
 .slider-img > img {
   width: 100%;
@@ -26,12 +26,18 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 48%;
+  width: 100%;
 }
 .slider-info .slider-info-inner {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+.slider-info .slider-info-inner .button span{
+  float: none;
+}
+.btn-30{
+  width: 30%;
 }
 .slider-title-1 {
   font-size: 42px;
