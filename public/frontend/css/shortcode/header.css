@@ -16,15 +16,16 @@ NOTE: This is Header style file. All Header related style included in this file.
   position: relative;
 }
 .main-menu > li > a {
-  color: #303030;
+  color: #97591c;
   display: block;
   text-transform: uppercase;
+  font-weight: 500;
 }
 .main-menu > li > a, .dropdwn li a, .single-mega-item li a {
    position: relative; 
 }
 .main-menu > li > a::before, .dropdwn li a:before, .single-mega-item li a:before {
-  background: #000 none repeat scroll 0 0;
+  background: #eb8c2c none repeat scroll 0 0;
   bottom: 0;
   content: "";
   height: 1px;
@@ -48,13 +49,15 @@ NOTE: This is Header style file. All Header related style included in this file.
   transition: all 0.3s ease 0s;
 }
 .main-menu > li:hover > a{
-  color: #000;
+  color: #eb8c2c;
+  font-weight: 600;
 } 
 .dropdwn > li:hover > a{
-  color: #000;
+  color: #eb8c2c;
+  font-weight: 600;
 }
 .single-mega-item > li:hover > a{
-  color: #000;
+  color: #eb8c2c;
 } 
 /*dropdwn Style*/
 .dropdwn {
@@ -116,7 +119,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 }
 .single-mega-item {
   float: left;
-  padding: 0 15px;
+  padding: 0 0px;
   width: 100%;
 }
 .single-mega-item li {
@@ -127,21 +130,25 @@ NOTE: This is Header style file. All Header related style included in this file.
   margin-bottom: 0;
 }
 .single-mega-item .menu-title {
-  color: #444;
+  text-align: left;
+  color: #97591c;
   font-size: 14px;
   padding-bottom: 0px;
+  padding-left: 0px;
   text-transform: capitalize;
 }
 .single-mega-item li:last-child{
   border-bottom: 0px solid #000;
 } 
 .single-mega-item li a {
-  color: #666;
+  color: #97591c;
   display: inline-block;
   font-size: 13px;
   line-height: 22px;
-  padding: 3px 0;
+  padding: 3px 8px;
   text-transform: capitalize;
+  overflow: hidden;
+  display: block;
 }
 .main-menu li:hover .mega-menu-area{
   transform: scale(1);
@@ -222,7 +229,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 
 /* - - - header-top-bar - - - */
 .header-top-bar {
-  background: #000 none repeat scroll 0 0;
+  background: #97591c none repeat scroll 0 0;
 }
 .call-us p {
   color: #cccccc;
@@ -298,7 +305,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 }
 .header-search-inner form {}
 .header-search-inner button.search-toggle {
-  color: #666;
+  color: #97591c;
   display: block;
   font-size: 20px;
   line-height: 1;
@@ -341,7 +348,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 .top-search-box > button {
   background: #ffffff none repeat scroll 0 0;
   border: medium none;
-  color: #999999;
+  color: #eb8c2c;
   float: left;
   font-size: 20px;
   height: 100%;
@@ -383,14 +390,14 @@ NOTE: This is Header style file. All Header related style included in this file.
 }
 .cart-toggler {}
 .cart-toggler > a {
-  color: #666666;
+  color: #97591c;
   display: block;
   line-height: 20px;
   padding-left: 20px;
   text-align: center;
 }
 .total-cart-in:hover .cart-toggler > a {
-  color: #000;
+  color: #eb8c2c;
 }
 .cart-icon {
   font-size: 20px;

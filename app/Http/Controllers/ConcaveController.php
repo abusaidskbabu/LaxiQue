@@ -269,6 +269,8 @@ class ConcaveController extends Controller{
             $product->image = explode(',',$product->image);
         }
 		
+        $feature_category= Category::where('is_active', 1)->where('is_feture',1)->get();
+
 		$metadata = [
 			'meta_title' => 'LuxiQue - Home',
 			'meta_keywords' => 'technology,product,LuxiQue,apple,xiomi,anker,sony',
@@ -283,6 +285,7 @@ class ConcaveController extends Controller{
             'categorys2' => $categorys2,
             'new_arrival_product'   => $new_arrival,
             'flash_sale'            => $products,
+            'feature_category'      => $feature_category,
             'featuredCategories'    => $featuredCategories,
             'featured_product'      => $featured_product,
             'deal_percentage_data'  => $deal_percentage_data ?? null,

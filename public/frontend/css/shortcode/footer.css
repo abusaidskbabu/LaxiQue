@@ -26,9 +26,9 @@
   margin-left: 10px;
 } 
 .footer-social li a {
-  border: 1px solid rgb(153, 153, 153);
+  border: 1px solid rgb(255 255 255);
   border-radius: 50%;
-  color: #999;
+  color: #ffffff;
   display: block;
   height: 30px;
   text-align: center;
@@ -73,7 +73,7 @@
   line-height: 30px;
 }
 .footer-menu li a i {
-  color: #999999;
+  color: #ffffff;
   font-size: 5px;
   margin-right: 10px;
   position: relative;
@@ -85,7 +85,7 @@
   font-weight: 500;
 }
 .footer-menu li:hover a, .footer-menu li:hover a i {
-  color: #000;
+  color: #c5c3c3;
 }
 .border-left {
   position: relative;
@@ -111,7 +111,9 @@
   box-shadow: none;
 }
 /*copyright*/
-.footer-bottom {}
+.footer-bottom {
+  background-color: #97591c;
+}
 .copyright {
   padding: 0 100px;
 }

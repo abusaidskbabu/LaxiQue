@@ -92,31 +92,58 @@
                         <ul class="main-menu text-center">
              
                             <li><inertia-link href="/">Home </inertia-link></li>
-                            <li class="mega-parent"><a href="#">Category</a>
-                                <div class="mega-menu-area clearfix">
-                                    <div class="mega-menu-link f-left">
-                                       
-                                        <ul  class="single-mega-item mb-4">
-                                            <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
-                                                <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
-                                                    {{category.name}}
-                                                </inertia-link>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <li class="dropdown"><a href="#" onclick="myFunction('jewelry_dropdowm')" class="dropbtn">Jewelry</a>
+                                <div id="jewelry_dropdowm" class="dropdown-content">
+                                    <ul  class="single-mega-item ">
+                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
+                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
+                                                {{category.name}}
+                                            </inertia-link>
+                                        </li>
+                                    </ul>
                                 </div>
                             </li>
 
-                            <t v-for="(category, index) in categorys2" :key="index" >
-                                <li v-if="category.is_feture == 1"> 
-                                    <inertia-link class="text-uppercase" :href="`/category/`+category.slug">{{category.name}}</inertia-link>
-                                </li>
-                            </t>
+                            <li class="dropdown"><a href="#" onclick="myFunction('bag_dropdowm')" class="dropbtn">Bag</a>
+                                <div id="bag_dropdowm" class="dropdown-content">
+                                    <ul  class="single-mega-item ">
+                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
+                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
+                                                {{category.name}}
+                                            </inertia-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
 
-                            <li> <inertia-link :href="route('shop.page')">Products</inertia-link></li>
+                            <li class="dropdown"><a href="#" onclick="myFunction('dress_dropdowm')" class="dropbtn">Dress</a>
+                                <div id="dress_dropdowm" class="dropdown-content">
+                                    <ul  class="single-mega-item ">
+                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
+                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
+                                                {{category.name}}
+                                            </inertia-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="dropdown"><a href="#" onclick="myFunction('watch_dropdowm')" class="dropbtn">Watch</a>
+                                <div id="watch_dropdowm" class="dropdown-content">
+                                    <ul  class="single-mega-item ">
+                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
+                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
+                                                {{category.name}}
+                                            </inertia-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <!-- <li> <inertia-link :href="route('shop.page')">Products</inertia-link></li> -->
                             <!-- <li> <inertia-link :href="route('blog.page')">News feed</inertia-link></li> -->
                             <!-- <li> <inertia-link :href="route('about.page')">About Us</inertia-link> </li> -->
-                            <li><inertia-link :href="route('contact.page')">Contact Us</inertia-link> </li>
+                            <!-- <li><inertia-link :href="route('contact.page')">Contact Us</inertia-link> </li> -->
                             <li><inertia-link href="/deals" class="deals" >Flash Sale</inertia-link> </li>
                         </ul>
                     </nav>
@@ -308,6 +335,7 @@
                                         <h4 class="footer-title border-left">Quick links</h4>
                                         <ul class="footer-menu link_child">
                                             <li><inertia-link href="/about"><i class="zmdi zmdi-circle"></i><span>About Us</span></inertia-link></li>
+                                            <li><inertia-link :href="route('contact.page')"><i class="zmdi zmdi-circle"></i><span>Contact Us</span></inertia-link> </li>
                                             <li><inertia-link href="/dashboard/my-orders"><i class="zmdi zmdi-circle"></i><span>Track Your Order</span></inertia-link></li>
                                             <li><inertia-link href="/dashboard/edit-account-information"><i class="zmdi zmdi-circle"></i><span>Shipping Details</span></inertia-link></li>
 
@@ -402,7 +430,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom black-bg plr-185">
+            <div class="footer-bottom  plr-185">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 text-center">

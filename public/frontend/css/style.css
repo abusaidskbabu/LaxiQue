@@ -148,7 +148,7 @@ p,span,h1,h2,h3,h4,h5,h6,li,div,strong,b{
   text-align: center;
 }
 .product-title {
-  color: #434343;
+  color: #97591c;
   font-family: "Montserrat",sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -185,9 +185,9 @@ p,span,h1,h2,h3,h4,h5,h6,li,div,strong,b{
 }
 .action-button > li > a {
   background: transparent;
-  border: 1px solid #ddd;
+  border: 1px solid #97591c;
   border-radius: 50%;
-  color: #000;
+  color:  #97591c;
   display: block;
   font-size: 14px;
   height: 30px;
@@ -198,8 +198,8 @@ p,span,h1,h2,h3,h4,h5,h6,li,div,strong,b{
   line-height: 28px;
 }
 .action-button > li:hover > a {
-  background: #000;
-  border-color: #000;
+  background: #eb8c2c;
+  border-color: #eb8c2c;
   color: #fff;
 }
 .product-item:hover {
@@ -1987,19 +1987,20 @@ a[title="Quickview"] > li{
 }
 
 .deals {
-  background: #1b1c1e;
+  background: #97591c;
   padding: 4px 10px;
-  color: #fff !important;
+  color: #ffffff !important;
   border-radius: 6px;
-  box-shadow: 4px 5px 5px 0px #828282;
+  /* box-shadow: 4px 5px 5px 0px #eb8c2c; */
   transition: 0.5s all;
   text-decoration: none;
 }
 
 .deals:hover{
-  background: #8c8c8c;
+  background: #eb8c2c;
   padding: 4px 20px;
   text-decoration: none;
+  /* box-shadow: 4px 5px 5px 0px #eb8c2c; */
 }
 
 .deals:before{
@@ -2098,7 +2099,7 @@ del {
   margin-bottom: 50px;
 }
 .footer-top {
-  background: #4a4f54;
+  background: #704215;
 }
 .footer-brief p {
   color: #fff;
