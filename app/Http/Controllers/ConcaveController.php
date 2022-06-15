@@ -271,6 +271,28 @@ class ConcaveController extends Controller{
 		
         $feature_category= Category::where('is_active', 1)->where('is_feture',1)->get();
 
+        
+        foreach ($feature_category as $row) {
+            $category_id = [];
+            array_push($category_id,$row->id);
+            foreach(Category::where('is_active', 1)->where('parent_id',$row->id)->get() as $child){
+                array_push($category_id,$child->id);
+                foreach(Category::where('is_active', 1)->where('parent_id',$child->id)->get() as $child_child){
+                    array_push($category_id,$child_child->id);
+                }
+            }
+
+            $row->products = Product::where('is_active',1)->where('hide_on_website', 0)->whereIn('category_id',$category_id)->get();
+
+        }
+
+        // var_dump($feature_category[3]);
+        // exit();
+
+        $thambnail_image= DB::table('thambnail_image')->FIRST();
+
+        $testimonials = DB::table('testimonials')->where('status',1)->orderBy('id', 'desc')->get();
+
 		$metadata = [
 			'meta_title' => 'LuxiQue - Home',
 			'meta_keywords' => 'technology,product,LuxiQue,apple,xiomi,anker,sony',
@@ -294,6 +316,8 @@ class ConcaveController extends Controller{
             'deal_price'            => $deal_price ?? null,
             'deal_date'             => $deal_date ?? null,
             'blogs'                 => $blogs ?? null,
+            'thambnail_image'       => $thambnail_image ?? null,
+            'testimonials'          => $testimonials ?? null,
         ])->withViewData($metadata);
     }
 

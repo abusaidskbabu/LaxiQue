@@ -565,3 +565,50 @@ del{white-space:nowrap;}
   .show {
     display:block;
 }
+
+.bg-lq{
+    background-color: #97591C !important;
+}
+
+
+
+.testimonial-area {
+    width: 100%;
+    height: 240px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    border: none;
+    background-color: inherit;
+    
+    margin: 5px;
+}
+
+.testimonial-area .face {
+    position: absolute;
+    /* color: #fff; */
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); */
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.06);
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    backface-visibility: hidden;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+.testimonial-area .face .comment i{
+    color: #000;
+}
+.testimonial-area .face .comment{
+    font-style: italic;
+    color: #000000;
+}
+
+.testimonial-area .face b{
+    color: #97591C;
+}

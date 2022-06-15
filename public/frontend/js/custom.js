@@ -199,3 +199,23 @@ window.onclick = function(event) {
     }
   }
 }
+
+
+jQuery(document).on('click','#pills-tab  .nav-item button',function(){
+
+    var id = $(this).attr('data-bs-target');
+
+    $('#pills-tab  .nav-item button').each(function() {
+        $(this).removeClass('active bg-lq');
+    });
+    
+    $('.categorytabContent .tab-pane').each(function() {
+        $(this).removeClass('show active');
+    });
+
+    $(this).addClass('active bg-lq');
+    $(id).addClass('show active');
+
+});
+
+

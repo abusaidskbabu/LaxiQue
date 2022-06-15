@@ -46,6 +46,7 @@
 
 		<script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
+		<script src="https://kit.fontawesome.com/9575f77c5e.js" crossorigin="anonymous"></script>
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
