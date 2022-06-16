@@ -153,7 +153,7 @@
 													<div class="payment-method ml-3 mt-5">
                                                         <h6 class="widget-title border-left mb-20">Coupon Code</h6>
 														<input style="width:70%;" type="text" name="coupon" id="coupon_code" v-model="checkoutForm.coupon" placeholder="Enter coupon code.." >
-														<a id="coupon_code_btn" @click="couponCheck()" style="height: 41px;padding: 5px 14px;margin-left: -4px;border-radius: 0 8px 8px 0;" href="javascript:void(0)" class="btn btn-dark">Update</a>
+														<a id="coupon_code_btn" @click="couponCheck()" style="height: 41px;padding: 5px 14px;margin-left: -4px;border-radius: 0 8px 8px 0;" href="javascript:void(0)" class="btn bg-lq text-light">Update</a>
 													</div>
 													
 
@@ -162,7 +162,7 @@
 														<input  type="checkbox" name="aggree" value="1" required > I agree with the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a>, <a href="/privacy-policy" target="_blank">Privacy Policy</a> and <a href="/other-policy" target="_blank">Other Policies</a>.
 													</div>
                                                     <!-- payment-method end -->
-                                                    <button class="submit-btn-1 mt-30 ml-4 btn-hover-1" type="submit">place order</button>
+                                                    <button class="submit-btn-1 bg-lq mt-30 ml-4 btn-hover-1" type="submit">place order</button>
                                                 </div>
                                             </div>
                                         </form>

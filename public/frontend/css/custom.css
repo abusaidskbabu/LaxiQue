@@ -318,7 +318,7 @@ del{white-space:nowrap;}
     position: fixed;
     right: -39px;
 	top:40vh;
-    background: #000;
+    background: #97591c;
     padding: 7px 22px;
     transform: rotate(270deg);
     border-radius: 8px 8px 0px 0px;
@@ -392,11 +392,11 @@ del{white-space:nowrap;}
         top: -2px;
         left: -1px;
         position: relative;
-        background-color: #000;
+        background-color: #97591c;
         content: '';
         display: inline-block;
         visibility: visible;
-        border: 2px solid white;
+        border: 2px solid #97591c;
     }
 	
 	.custom-container li {

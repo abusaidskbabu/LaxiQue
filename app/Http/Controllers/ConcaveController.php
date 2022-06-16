@@ -191,7 +191,7 @@ class ConcaveController extends Controller{
         $featuredCatIds =  Product::where('featured', 1)->where('hide_on_website', 0)->where('is_active', 1)->with('deal')->pluck('category_id');
         $featuredCategories = DB::table('categories')->whereIn('id', $featuredCatIds)->where('is_active', 1)->limit(16)->get();
 
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -346,7 +346,7 @@ class ConcaveController extends Controller{
 		
 		$about = \DB::table('pages')->first();
 
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -368,7 +368,7 @@ class ConcaveController extends Controller{
         ]);
     }  
     public function contact(){
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -387,7 +387,7 @@ class ConcaveController extends Controller{
     }  
 
     public function register(){
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -410,7 +410,7 @@ class ConcaveController extends Controller{
 
     
     public function signup(){
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -431,6 +431,7 @@ class ConcaveController extends Controller{
     
 
     public function contact_submit(Request $request){
+        
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
@@ -663,7 +664,7 @@ class ConcaveController extends Controller{
 
     
     public function compare(){
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -709,20 +710,19 @@ public function blog_page(){
     $blogs = DB::table('blogs')->where('is_active', 1)->orderBy('id', 'DESC')->limit(12)->get() ?? null;
     $user = Auth::user();
 
-    $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
-        foreach($categorys2 as $item){
-            $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
+    $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
+    foreach($categorys2 as $item){
+        $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
-            foreach($item->sub_category as $item1){
-                
-                $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
+        foreach($item->sub_category as $item1){
+            
+            $item1->child_sub_category = Category::where('is_active', 1)->where('parent_id', $item1->id)->orderby('name', 'ASC')->get();
 
-                foreach($item1->child_sub_category as $item2){
-                    $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
-                }
+            foreach($item1->child_sub_category as $item2){
+                $item2->child_child_sub_category = Category::where('is_active', 1)->where('parent_id', $item2->id)->orderby('name', 'ASC')->get();
             }
         }
-       
+    }
     return Inertia::render('Blog/Index', [
         'user'      => $user,
         'categorys2' =>$categorys2,

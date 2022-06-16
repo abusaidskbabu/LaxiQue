@@ -87,53 +87,20 @@
                     </div>
                 </div>
                 <!-- primary-menu -->
-                <div class="col-lg-10 d-none d-lg-block">
+                <div class="col-lg-2 d-none d-lg-block"></div>
+                <div class="col-lg-8 d-none d-lg-block">
                     <nav id="primary-menu">
                         <ul class="main-menu text-center">
              
                             <li><inertia-link href="/">Home </inertia-link></li>
-                            <li class="dropdown"><a href="#" onclick="myFunction('jewelry_dropdowm')" class="dropbtn">Jewelry</a>
-                                <div id="jewelry_dropdowm" class="dropdown-content">
-                                    <ul  class="single-mega-item ">
-                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
-                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
-                                                {{category.name}}
-                                            </inertia-link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
 
-                            <li class="dropdown"><a href="#" onclick="myFunction('bag_dropdowm')" class="dropbtn">Bag</a>
-                                <div id="bag_dropdowm" class="dropdown-content">
+                            <li v-for="(category, index) in categorys2" :key="index" class="dropdown">
+                                <a href="#" @click="myFunction(category.slug)" class="dropbtn">{{category.name}}</a>
+                                <div :id="category.slug" class="dropdown-content">
                                     <ul  class="single-mega-item ">
-                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
-                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
-                                                {{category.name}}
-                                            </inertia-link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="dropdown"><a href="#" onclick="myFunction('dress_dropdowm')" class="dropbtn">Dress</a>
-                                <div id="dress_dropdowm" class="dropdown-content">
-                                    <ul  class="single-mega-item ">
-                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
-                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
-                                                {{category.name}}
-                                            </inertia-link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="dropdown"><a href="#" onclick="myFunction('watch_dropdowm')" class="dropbtn">Watch</a>
-                                <div id="watch_dropdowm" class="dropdown-content">
-                                    <ul  class="single-mega-item ">
-                                        <li v-for="(category, index) in categorys2" :key="index" class="menu-title">
-                                            <inertia-link :href="`/category/`+category.slug" style="font-weight:700;"> 
-                                                {{category.name}}
+                                        <li v-for="(subcat, index2) in category.sub_category" :key="index2" class="menu-title">
+                                            <inertia-link :href="`/category/`+subcat.slug" style="font-weight:700;"> 
+                                                {{subcat.name}}
                                             </inertia-link>
                                         </li>
                                     </ul>
@@ -225,11 +192,11 @@
                                     <li>
                                         <div class="top-cart-inner view-cart">
                                             <span v-if="cart.total_items > 0" class="text-uppercase">
-                                                <inertia-link href="/cart" alt="View Cart" class="btn btn-dark btn-sm mr-2">View cart</inertia-link>
+                                                <inertia-link href="/cart" alt="View Cart" class="btn bg-lq text-light btn-sm mr-2">View cart</inertia-link>
                                             </span>
 
                                             <span v-if="cart.total_items > 0" class="text-uppercase">
-                                                 <inertia-link href="/checkout" alt="checkout" class="btn btn-dark btn-sm">Checkout</inertia-link>
+                                                 <inertia-link href="/checkout" alt="checkout" class="btn bg-lq text-light btn-sm">Checkout</inertia-link>
                                             </span>
 
                                         </div>
@@ -460,7 +427,7 @@
 						<div class="first_content">
 							<h3>YOUR EXPERIENCE</h3>
 							<p>Don’t hold back. Good or bad - tell it like it is.</p>
-							<p>How likely are you to recommend <b>TechHut.com.bd</b> to a friend? *</p>
+							<p>How likely are you to recommend <b>LuxiQue.com.bd</b> to a friend? *</p>
 							<form class="feedback_form" @submit.prevent="feedbackSubmit" >
 								<p><span>Very unlikely</span> <span class="f_right">Very likely</span></p>
 								<input type="radio" name="feedback" value="1" v-model="feedbackForm.feedback" required>
@@ -476,7 +443,7 @@
 								
 								<br><p><b>Your Age</b> <br><input type="text" name="age" v-model="feedbackForm.age" required></p>
 								
-								<p class="comment_lavel">What could we do better on <b>TechHut.com.bd </b>?</p>
+								<p class="comment_lavel">What could we do better on <b>LuxiQue.com.bd </b>?</p>
 								<textarea name="feedback_comment" style="min-height:120px;" placeholder="Your Comments.." v-model="feedbackForm.feedback_comment"></textarea>
 								<button  @click="feedbackSubmit()" class="deals feedback_submit">Submit</button>
 							</form>
@@ -548,6 +515,25 @@
         },
 
         methods: {
+            myFunction(value){
+                
+                // alert(value);
+                document.getElementById(""+value+"").classList.toggle("show");
+
+                // Close the dropdown menu if the user clicks outside of it
+                window.onclick = function(event) {
+                    if (!event.target.matches('.dropbtn')) {
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                                openDropdown.classList.remove('show');
+                            }
+                        }
+                    }
+                }
+            },
             logout() {
                 this.$inertia.post(route('logout'));
             },

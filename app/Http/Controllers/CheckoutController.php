@@ -19,7 +19,7 @@ class CheckoutController extends Controller
     public function index(){
         $cart = session()->get('cart');
         
-		$categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+		$categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -42,7 +42,7 @@ class CheckoutController extends Controller
     public function checkout(){
         $cart = session()->get('cart');
 
-		$categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+		$categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 

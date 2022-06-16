@@ -59,7 +59,7 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -289,7 +289,7 @@ class ProductController extends Controller
 			$metakeyWord = explode(' ',$products->name);
 			$metakeyWord = implode(',',$metakeyWord);
 
-            $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+            $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
             foreach($categorys2 as $item){
                 $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -426,7 +426,7 @@ class ProductController extends Controller
     
     public function category_page(Request $request){
         $categories = DB::table('categories')->where('is_active', 1)->get();
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -478,7 +478,7 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -535,7 +535,7 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 
@@ -629,7 +629,7 @@ class ProductController extends Controller
             $product->image = explode(',',$product->image);
         }
 
-        $categorys2= Category::where('is_active', 1)->whereNull('parent_id')->orderby('name', 'ASC')->get();
+        $categorys2= Category::where('is_active', 1)->where('is_feture',1)->get();
         foreach($categorys2 as $item){
             $item->sub_category = Category::where('is_active', 1)->where('parent_id', $item->id)->orderby('name', 'ASC')->get();
 

@@ -1,5 +1,77 @@
 jQuery(document).ready(function(){
 	jQuery('.shipping_charge').trigger('click');
+
+    $('.categorytabContent .tab-pane').each(function(i, el) {
+        if ( i === 0) {
+            $(this).addClass('show active');
+            // $('.row',this).addClass('active-blog');
+            $('.row',this).slick({
+                speed: 700,
+                arrows: false,
+                dots: false,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay:true,
+                prevArrow: '<button type="button" class="arrow-prev"><i class="zmdi zmdi-caret-left"></i></button>',
+                nextArrow: '<button type="button" class="arrow-next"><i class="zmdi zmdi-caret-right"></i></button>',
+                responsive: [
+                    {  breakpoint: 992,   settings: { slidesToShow: 3,  }  },
+                    {  breakpoint: 768,   settings: { slidesToShow: 2, }   },
+                ]
+            });
+        }
+    });
+   
+    $('.active-featured-product2').slick({ 
+        speed: 700, 
+        arrows: true, 
+        dots: false,
+        slidesToShow: 5,
+		autoplay:true,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="arrow-prev"><i class="zmdi zmdi-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="arrow-next"><i class="zmdi zmdi-caret-right"></i></button>',
+        responsive: [
+            {  breakpoint: 992,   settings: { slidesToShow: 3,  }  },
+            {  breakpoint: 768,   settings: { slidesToShow: 1, }   },
+            {  breakpoint: 480,   settings: { slidesToShow: 1, }   },
+			{  breakpoint: 320,   settings: { slidesToShow: 1, }   },
+        ]
+    });   
+    
+    $('.active-featured-product').slick({ 
+        speed: 700, 
+        arrows: true, 
+        dots: false,
+        slidesToShow: 5,
+		autoplay:true,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="arrow-prev"><i class="zmdi zmdi-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="arrow-next"><i class="zmdi zmdi-caret-right"></i></button>',
+        responsive: [
+            {  breakpoint: 992,   settings: { slidesToShow: 3,  }  },
+            {  breakpoint: 768,   settings: { slidesToShow: 1, }   },
+            {  breakpoint: 480,   settings: { slidesToShow: 1, }   },
+			{  breakpoint: 320,   settings: { slidesToShow: 1, }   },
+        ]
+    });    
+
+
+    $('.active-team-member').slick({
+        speed: 700,
+        arrows: false,
+        dots: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay:true,
+        prevArrow: '<button type="button" class="arrow-prev"><i class="zmdi zmdi-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="arrow-next"><i class="zmdi zmdi-caret-right"></i></button>',
+        responsive: [
+            {  breakpoint: 992,   settings: { slidesToShow: 3,  }  },
+            {  breakpoint: 768,   settings: { slidesToShow: 1, }   },
+        ]
+    });
+
 });
 $(document).on('click','.shipping_charge',function(){
 	var dataCouponValue = jQuery('#dataCouponValue').attr('data-coupon-value');
@@ -181,24 +253,6 @@ window.addEventListener("online", (event) => {
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function myFunction(value) {
-    // alert(value);
-    document.getElementById(""+value+"").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
 
 
 jQuery(document).on('click','#pills-tab  .nav-item button',function(){
@@ -211,10 +265,27 @@ jQuery(document).on('click','#pills-tab  .nav-item button',function(){
     
     $('.categorytabContent .tab-pane').each(function() {
         $(this).removeClass('show active');
+        // $('.row',this).removeClass('active-blog slick-initialized slick-slider');
     });
-
+    
     $(this).addClass('active bg-lq');
     $(id).addClass('show active');
+    // $('.row',id).addClass('active-blog');
+
+    $('.row',id).slick({
+        speed: 700,
+        arrows: true,
+        dots: false,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay:true,
+        prevArrow: '<button type="button" class="arrow-prev"><i class="zmdi zmdi-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="arrow-next"><i class="zmdi zmdi-caret-right"></i></button>',
+        responsive: [
+            {  breakpoint: 992,   settings: { slidesToShow: 3,  }  },
+            {  breakpoint: 768,   settings: { slidesToShow: 1, }   },
+        ]
+    });
 
 });
 

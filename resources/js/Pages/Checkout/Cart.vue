@@ -109,7 +109,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="td-title-1"></td>
-                                                            <td class="text-right">  <inertia-link href="/checkout" alt="checkout"> <button class="submit-btn-1 black-bg btn-hover-2" type="submit">Checkout</button> </inertia-link></td>
+                                                            <td class="text-right">  <inertia-link href="/checkout" alt="checkout"> <button class="submit-btn-1 bg-lq btn-hover-2" type="submit">Checkout</button> </inertia-link></td>
                                                         </tr>
                                                     </table>
                                                 </div>
